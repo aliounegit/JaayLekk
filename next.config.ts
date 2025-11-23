@@ -1,14 +1,12 @@
-// next.config.ts
 import type { NextConfig } from "next";
 
-// PWA config
 const withPWA = require("@ducanh2912/next-pwa").default({
   dest: "public",
   disable: process.env.NODE_ENV === "development",
 });
 
 const nextConfig: NextConfig = {
-  // Désactiver Turbopack et forcer Webpack (plus stable)
+  // Forcer Webpack en utilisant le hook webpack
   webpack: (config) => {
     return config;
   },
@@ -21,12 +19,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-
-  experimental: {
-    // Si jamais Turbopack est forcé, on le vide
-    turbopack: false,
-  },
 };
 
-// Export final avec PWA
 export default withPWA(nextConfig);
